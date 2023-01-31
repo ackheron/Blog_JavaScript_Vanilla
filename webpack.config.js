@@ -2,7 +2,10 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: path.resolve(__dirname, "src/index.js"),
+    entry: {
+        main: path.resolve(__dirname, "src/index.js"),
+        form: path.resolve(__dirname, "src/form/form.js"),
+    },
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "[name].bundle.js",
@@ -22,7 +25,14 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            filename: "index.html",
             template: path.resolve(__dirname, "src/index.html"),
+            chunks: ["main"],
+        }),
+        new HtmlWebpackPlugin({
+            filename: "form.html",
+            template: path.resolve(__dirname, "src/index.html"),
+            chunks: ["form"],
         }),
     ],
     devtool: "source-map",
