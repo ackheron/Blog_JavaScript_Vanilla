@@ -8,16 +8,11 @@
         auto;
     header {
         grid-area: header;
-        background-color: blue;
-        padding: 1.25rem;
     }
     main {
         grid-area: main;
-        background-color: red;
     }
     footer {
         grid-area: footer;
-        background-color: green;
-        padding: 1.25rem;
     }
 }
