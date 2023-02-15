@@ -1,0 +1,48 @@
+.form-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form {
+        width: 43.75rem;
+        padding: 2.5rem;
+        box-shadow: var(--box-shadow);
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            label {
+                font-size: 1.125rem;
+                color: var(--accent);
+                font-weight: 700;
+                margin-bottom: 0.625rem;
+                max-width: 8ch;
+                cursor: pointer;
+            }
+            input,
+            textarea {
+                border: 1px solid var(--divider);
+                padding: 0.625rem;
+                outline: 0;
+                border-radius: 3px;
+                margin-bottom: 0.625rem;
+                &:focus {
+                    border-color: var(--accent);
+                }
+            }
+            textarea {
+                min-height: 12.5rem;
+            }
+        }
+        .form-btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0.625rem;
+            .btn {
+                margin: 0 10px;
+            }
+        }
+    }
+}
