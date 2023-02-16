@@ -27,8 +27,11 @@
                 outline: 0;
                 border-radius: 3px;
                 margin-bottom: 0.625rem;
-                &:focus {
+                &:focus::placeholder {
+                    background-color: #555;
                     border-color: var(--accent);
+                    text-align: right;
+                    font-style: italic;
                 }
             }
             textarea {

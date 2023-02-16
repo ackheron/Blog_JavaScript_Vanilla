@@ -1,0 +1,28 @@
+.title {
+    &-underline {
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid var(--divider);
+    }
+}
+
+.btn {
+    border: none;
+    border-radius: 3px;
+    padding: 0.625rem 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 200ms;
+    &:hover {
+        box-shadow: var(--box-shadow);
+        transition: 200ms;
+    }
+    &-primary {
+        background-color: var(--primary);
+        color: white;
+    }
+    &-secondary {
+        border: 1px solid var(--primary);
+        background-color: white;
+        color: var(--primary);
+    }
+}
