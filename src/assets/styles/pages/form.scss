@@ -1,8 +1,11 @@
 .form-content {
+    background-color: var(--divider);
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     form {
+        background-color: white;
         width: 43.75rem;
         padding: 2.5rem;
         box-shadow: var(--box-shadow);

@@ -1,0 +1,51 @@
+.index-content {
+    background-color: var(--divider);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem;
+    .articles-container {
+        max-width: 50rem;
+        width: 100%;
+        margin: 50px 0 10px 0;
+        .article {
+            background-color: white;
+            padding: 0 3.125rem;
+            border-radius: 3px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            &-profile {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                margin-top: -45px;
+            }
+            &-title {
+                margin-top: 1.25rem;
+                margin-bottom: 0;
+                color: var(--text);
+            }
+            &-author {
+                margin-bottom: 1.875rem;
+                color: var(--hint);
+            }
+            &-content {
+                max-width: 37.5rem;
+                color: var(--text);
+            }
+            &-actions {
+                width: 100%;
+                display: flex;
+                justify-content: end;
+                margin-top: 1.25rem;
+                padding: 1.25rem 0;
+                border-top: 1px solid var(--divider);
+                .btn {
+                    margin-left: 0.625rem;
+                }
+            }
+        }
+    }
+}
