@@ -8,7 +8,7 @@ const form = document.querySelector("form");
 // Selection de liste ul pour afficher les erreurs
 const errorElement = document.querySelector("#errors");
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     /*  L'objet FormData est utilisé pour récupérer les données saisies dans un formulaire HTML. L'objet FormData est une interface standard du navigateur web qui permet de créer des paires clé/valeur à partir des champs de formulaire */
@@ -22,8 +22,22 @@ form.addEventListener("submit", (event) => {
     const formObject = Object.fromEntries(entries);
     console.log("🚀 ~ file: form.js ~ line 19 ~ form.addEventListener ~ formObject", formObject);
 
+    // Appel de la fonction formIsValid pour valider saisies dans le formulaire
     if (formIsValid(formObject)) {
-        const json = JSON.stringify(formObject);
+        try {
+            const json = JSON.stringify(formObject);
+
+            const response = await fetch("https://restapi.fr/api/blogarticles", {
+                method: "POST",
+                headers: { Accept: "application/json", "Content-Type": "application/json" },
+                body: json,
+            });
+
+            const body = await response.json();
+            console.log("🚀 ~ file: form.js ~ line 38 ~ form.addEventListener ~ body", body);
+        } catch (error) {
+            console.log("🚀 ~ file: form.js ~ line 40 ~ form.addEventListener ~ error", error);
+        }
     }
 });
 
