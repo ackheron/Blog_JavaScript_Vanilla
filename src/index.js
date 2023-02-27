@@ -94,7 +94,6 @@ const createArticles = (articles) => {
       </div>
     `;
         fragment.append(singleArticleDOM);
-        console.log("🚀 ~ file: index.js ~ line 87 ~ createArticles ~ fragment", fragment);
     }
 
     // Efface le contenu de l'élément HTML sélectionné et ajoute les éléments créés en une seule opération.
