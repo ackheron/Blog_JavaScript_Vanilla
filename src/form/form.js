@@ -27,7 +27,7 @@ form.addEventListener("submit", async (event) => {
         try {
             const json = JSON.stringify(formObject);
 
-            const response = await fetch("https://restapi.fr/api/blogarticles", {
+            const response = await fetch("https://restapi.fr/api/ackblog", {
                 method: "POST",
                 headers: { Accept: "application/json", "Content-Type": "application/json" },
                 body: json,
@@ -47,7 +47,7 @@ const formIsValid = (formObject) => {
 
     /* si le champ "author", "category" ou "article" est vide, un message d'erreur est ajouté au tableau errors.
     si la longueur du champ "article" est inférieure à 20 caractères, un autre message d'erreur est ajouté au tableau. */
-    if (!formObject.author || !formObject.category || !formObject.article) {
+    if (!formObject.author || !formObject.category || !formObject.article || !formObject.img || !formObject.title) {
         errors.push("Vous devez renseigner tout les champs");
     }
     if (formObject.article.length < 20) {

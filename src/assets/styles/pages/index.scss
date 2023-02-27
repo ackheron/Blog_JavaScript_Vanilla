@@ -11,6 +11,7 @@
         .article {
             background-color: white;
             padding: 0 3.125rem;
+            margin-bottom: 5rem;
             border-radius: 3px;
             box-shadow: var(--box-shadow);
             display: flex;
@@ -34,6 +35,8 @@
             &-content {
                 max-width: 37.5rem;
                 color: var(--text);
+                // La propriété est white-space permet de gérer les espaces, les tabulations et les nouvelles lignes dans les textes d'un élément.
+                white-space: pre-line;
             }
             &-actions {
                 width: 100%;
