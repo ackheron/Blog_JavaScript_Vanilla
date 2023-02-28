@@ -86,14 +86,15 @@ const createArticles = (articles) => {
       <h2 class="article-title">${article.title}</h2>
       <p class="article-author">${article.author}</p>
       <p class="article-content">
-        ${article.article}
+      ${article.article}
       </p>
       <div class="article-actions">
-        <button class="btn btn-danger data-id=${article._id}">Supprimer</button>
-        <button class="btn btn-primary">Modifier</button>
+      <button class="btn btn-danger data-id=${article._id}">Supprimer</button>
+      <button class="btn btn-primary">Modifier</button>
       </div>
-    `;
-        fragment.append(singleArticleDOM);
+      `;
+        fragment.prepend(singleArticleDOM);
+        // prepend au lieu de append ajoute les éléments dans l'ordre inverse de l'itération de la boucle et donc d'avoir les articles les plus récents en haut de page.
     }
 
     // Efface le contenu de l'élément HTML sélectionné et ajoute les éléments créés en une seule opération.
@@ -105,7 +106,7 @@ const createArticles = (articles) => {
 const fetchArticles = async (param) => {
     try {
         // Récupère les données à partir de l'API REST en utilisant l'API Fetch.
-        const response = await fetch("https://restapi.fr/api/ackblog");
+        const response = await fetch("https://restapi.fr/api/ackblog2");
         // Convertit les données retournées en objet JavaScript.
         let articles = await response.json();
 
