@@ -51,11 +51,11 @@ console.log("hello from index");
 //         // nous devons donc le transformer en tableau :
 //         if (!Array.isArray(articles)) {
 //             articles = [articles];
-//             console.log("🚀 ~ file: index.js ~ line 15 ~ fetchArticles ~ articles", articles);
+// console.log("🚀 ~ file: index.js ~ line 15 ~ fetchArticles ~ articles", articles);
 //         }
 //         // Appelle la fonction `createArticles` pour afficher les articles récupérés dans la page HTML.
 //         createArticles(articles);
-//         console.log("🚀 ~ file: index.js ~ line 41 ~ fetchArticles ~ articles", articles);
+// console.log("🚀 ~ file: index.js ~ line 41 ~ fetchArticles ~ articles", articles);
 //     } catch (error) {
 //         console.error(error);
 //     }
@@ -85,11 +85,12 @@ const createArticles = (articles) => {
       <img class="article-profile" src="${article.img}" alt="profile" />
       <h2 class="article-title">${article.title}</h2>
       <p class="article-author">${article.author}</p>
+      <p class="article-category">${article.category}</p>
       <p class="article-content">
       ${article.article}
       </p>
       <div class="article-actions">
-      <button class="btn btn-danger data-id=${article._id}">Supprimer</button>
+      <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
       <button class="btn btn-primary">Modifier</button>
       </div>
       `;
@@ -100,10 +101,38 @@ const createArticles = (articles) => {
     // Efface le contenu de l'élément HTML sélectionné et ajoute les éléments créés en une seule opération.
     articlesContainerElement.innerHTML = "";
     articlesContainerElement.append(fragment);
+
+    // Récupère tous les boutons "Supprimer" créés précédemment et stocke-les dans une variable.
+    const deleteButtons = articlesContainerElement.querySelectorAll(".btn-danger");
+
+    // Ajoute un écouteur d'événements à chaque bouton "Supprimer".
+    for (const button of deleteButtons) {
+        button.addEventListener("click", async (event) => {
+            // Récupère le bouton cliqué et l'ID de l'article correspondant.
+            // event.target est utilisé pour récupérer l'élément DOM qui a déclenché l'événement et accéder à ses propriétés et attributs associés
+            const target = event.target;
+            // La propriété dataset est utilisée pour accéder aux attributs data-* d'un élément HTML ici pour accéder à la valeur de l'attribut data-id de l'élément HTML qui a déclenché l'événement click.
+            const articleID = target.dataset.id;
+
+            // Envoie une requête DELETE à l'API REST pour supprimer l'article correspondant.
+            try {
+                const response = await fetch(`https://restapi.fr/api/ackblog2/${articleID}`, {
+                    method: "DELETE",
+                });
+                const body = await response.json();
+                console.log("🚀 ~ file: index.js ~ line 115 ~ button.addEventListener ~ body", body);
+
+                // Actualise la liste des articles après la suppression.
+                fetchArticles();
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    }
 };
 
 // Cette fonction est asynchrone et utilise l'API Fetch pour récupérer des données d'un endpoint de l'API REST.
-const fetchArticles = async (param) => {
+const fetchArticles = async () => {
     try {
         // Récupère les données à partir de l'API REST en utilisant l'API Fetch.
         const response = await fetch("https://restapi.fr/api/ackblog2");

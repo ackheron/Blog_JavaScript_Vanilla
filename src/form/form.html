@@ -20,23 +20,23 @@
                     <h2 class="title-underline">Ajouter un article</h2>
                     <fieldset class="form-group">
                         <label for="author">Auteur</label>
-                        <input type="text" name="author" id="author" placeholder="Votre nom ou pseudo" />
+                        <input required type="text" name="author" id="author" placeholder="Votre nom ou pseudo" />
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="author">Image de profile</label>
-                        <input type="text" name="img" id="img" />
+                        <input required type="text" name="img" id="img" />
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="cat">Catégorie</label>
-                        <input type="text" name="category" id="category" placeholder="#exemple " />
+                        <input required type="text" name="category" id="category" placeholder="#exemple " />
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="cat">Titre</label>
-                        <input type="text" name="title" id="title" placeholder="Entrez un titre " />
+                        <input required type="text" name="title" id="title" placeholder="Entrez un titre " />
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="article">Article</label>
-                        <textarea name="article" id="article" placeholder="Entrez votre texte..."></textarea>
+                        <textarea required name="article" id="article" placeholder="Entrez votre texte..."></textarea>
                     </fieldset>
                     <!--Ajout d'un liste pour l'affichage des erreurs   -->
                     <ul class="text-error" id="errors"></ul>
