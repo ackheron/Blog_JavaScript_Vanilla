@@ -1,3 +1,4 @@
+import axios from "axios";
 import "./assets/styles/main.scss";
 
 console.log("hello from index");
@@ -116,10 +117,8 @@ const createArticles = (articles) => {
 
             // Envoie une requête DELETE à l'API REST pour supprimer l'article correspondant.
             try {
-                const response = await fetch(`https://restapi.fr/api/ackblog2/${articleID}`, {
-                    method: "DELETE",
-                });
-                const body = await response.json();
+                const response = await axios.delete(`https://restapi.fr/api/ackblog4/${articleID}`);
+                const body = response.data;
                 console.log("🚀 ~ file: index.js ~ line 115 ~ button.addEventListener ~ body", body);
 
                 // Actualise la liste des articles après la suppression.
@@ -135,9 +134,8 @@ const createArticles = (articles) => {
 const fetchArticles = async () => {
     try {
         // Récupère les données à partir de l'API REST en utilisant l'API Fetch.
-        const response = await fetch("https://restapi.fr/api/ackblog2");
-        // Convertit les données retournées en objet JavaScript.
-        let articles = await response.json();
+        const response = await axios.get("https://restapi.fr/api/ackblog4");
+        let articles = response.data;
 
         // Si l'objet retourné n'est pas un tableau, transforme-le en tableau.
         if (!Array.isArray(articles)) {
