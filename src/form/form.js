@@ -27,7 +27,7 @@ form.addEventListener("submit", async (event) => {
         try {
             const json = JSON.stringify(formObject);
 
-            const response = await fetch("https://restapi.fr/api/ackblog2", {
+            const response = await fetch("https://restapi.fr/api/ackblog6", {
                 method: "POST",
                 headers: { Accept: "application/json", "Content-Type": "application/json" },
                 body: json,

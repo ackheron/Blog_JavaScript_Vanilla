@@ -12,16 +12,29 @@ header {
         font-size: 2.5rem;
         font-weight: 700;
     }
-    ul {
-        display: flex;
-        li {
-            .header-nav {
-                font-size: 1.125rem;
-                padding: 0 10px;
+    .header-menu {
+        ul {
+            @include pluton {
+                display: none;
             }
-            .active {
-                font-weight: 700;
-                text-decoration: underline;
+            display: flex;
+            li {
+                .header-nav {
+                    font-size: 1.125rem;
+                    padding: 0 10px;
+                }
+                .active {
+                    font-weight: 700;
+                    text-decoration: underline;
+                }
+            }
+        }
+        &-icon {
+            display: none;
+            font-size: 1.875rem;
+            color: white;
+            @include pluton {
+                display: initial;
             }
         }
     }

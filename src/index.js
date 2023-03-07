@@ -116,7 +116,7 @@ const createArticles = (articles) => {
 
             // Envoie une requête DELETE à l'API REST pour supprimer l'article correspondant.
             try {
-                const response = await fetch(`https://restapi.fr/api/ackblog2/${articleID}`, {
+                const response = await fetch(`https://restapi.fr/api/ackblog6/${articleID}`, {
                     method: "DELETE",
                 });
                 const body = await response.json();
@@ -135,7 +135,7 @@ const createArticles = (articles) => {
 const fetchArticles = async () => {
     try {
         // Récupère les données à partir de l'API REST en utilisant l'API Fetch.
-        const response = await fetch("https://restapi.fr/api/ackblog2");
+        const response = await fetch("https://restapi.fr/api/ackblog6");
         // Convertit les données retournées en objet JavaScript.
         let articles = await response.json();
 
