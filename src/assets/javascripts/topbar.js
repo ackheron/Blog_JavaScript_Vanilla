@@ -52,10 +52,9 @@ const openMenu = () => {
 =============================================*/
 const createMobileMenu = () => {
     mobileMenuDOM = document.createElement("div");
-    mobileMenuDOM.classList.add("mobile-menu");
+    mobileMenuDOM.classList.add("header-menu-mobile");
     // On empêche la fermeture du menu mobile lorsque on clique à l'intérieur
     mobileMenuDOM.addEventListener("click", (event) => {
-        event.preventDefault();
         event.stopPropagation();
     });
     // on copie la liste des liens du menu principal dans le menu mobile en clonant l'élément ul
@@ -73,3 +72,17 @@ const closeMenu = () => {
     mobileMenuDOM.classList.remove("open");
 };
 /*=====  End of Fermeture du menu mobile  ======*/
+
+// Nous récupérons les clicks sur window pour fermer le menu
+window.addEventListener("click", (event) => {
+    if (isOpenMenu) {
+        toggleMobileMenu();
+    }
+});
+
+// SI la fenêtre est agrandie et qu'elle dépasse 480px de largeur alors nous fermons le menu si il est ouvert
+window.addEventListener("resize", (event) => {
+    if (window.innerWidth > 480 && isOpenMenu) {
+        toggleMobileMenu();
+    }
+});
