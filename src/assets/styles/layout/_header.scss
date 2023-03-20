@@ -5,6 +5,7 @@ header {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     a {
         color: white;
     }
@@ -12,16 +13,51 @@ header {
         font-size: 2.5rem;
         font-weight: 700;
     }
-    ul {
-        display: flex;
-        li {
-            .header-nav {
-                font-size: 1.125rem;
-                padding: 0 10px;
+    .header-menu {
+        ul {
+            @include pluton {
+                display: none;
             }
-            .active {
-                font-weight: 700;
-                text-decoration: underline;
+            display: flex;
+            li {
+                .header-nav {
+                    font-size: 1.125rem;
+                    padding: 0 10px;
+                }
+                .active {
+                    font-weight: 700;
+                    text-decoration: underline;
+                }
+            }
+        }
+        &-icon {
+            display: none;
+            font-size: 1.875rem;
+            color: white;
+            @include pluton {
+                display: initial;
+            }
+        }
+        &-mobile {
+            display: none;
+        }
+        &-mobile.open {
+            display: block;
+            position: absolute;
+            box-shadow: var(--box-shadow);
+            top: 6.25rem;
+            right: 0;
+            width: 100%;
+            background: white;
+            ul {
+                display: block;
+                li {
+                    margin: 1.25rem 0;
+                    text-align: center;
+                    a {
+                        color: var(--text);
+                    }
+                }
             }
         }
     }

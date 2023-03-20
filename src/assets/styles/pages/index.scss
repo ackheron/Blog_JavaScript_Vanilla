@@ -11,6 +11,9 @@
         .article {
             background-color: white;
             padding: 0 3.125rem;
+            @include pluton {
+                padding: 0 1.25rem;
+            }
             margin-bottom: 5rem;
             border-radius: 3px;
             box-shadow: var(--box-shadow);

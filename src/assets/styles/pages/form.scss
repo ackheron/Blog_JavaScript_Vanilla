@@ -6,8 +6,12 @@
     align-items: center;
     form {
         background-color: white;
-        width: 43.75rem;
+        max-width: 43.75rem;
+        width: 100%;
         padding: 2.5rem;
+        @include pluton {
+            padding: 1rem;
+        }
         box-shadow: var(--box-shadow);
         border-radius: 3px;
         display: flex;
