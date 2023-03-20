@@ -39,7 +39,7 @@ form.addEventListener("submit", async (event) => {
     // }
     if (formIsValid(formObject)) {
         try {
-            const response = await axios.post("https://restapi.fr/api/ackblog4", formObject);
+            const response = await axios.post("https://restapi.fr/api/ackblog8", formObject);
             console.log("🚀 ~ file: form.js ~ line 43 ~ form.addEventListener ~ response", response);
         } catch (error) {
             console.error(error);
