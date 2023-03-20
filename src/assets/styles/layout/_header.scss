@@ -1,11 +1,11 @@
-header {
+.header {
     background-color: var(--dark);
     padding: 1.25rem;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    // position: relative;
     a {
         color: white;
     }
@@ -38,25 +38,30 @@ header {
                 display: initial;
             }
         }
-        &-mobile {
-            display: none;
-        }
-        &-mobile.open {
+    }
+    &-menu-mobile {
+        display: none;
+    }
+    &-menu-mobile.open {
+        display: block;
+        box-shadow: var(--box-shadow);
+        width: 100%;
+        background: white;
+        ul {
             display: block;
-            position: absolute;
-            box-shadow: var(--box-shadow);
-            top: 6.25rem;
-            right: 0;
-            width: 100%;
-            background: white;
-            ul {
-                display: block;
-                li {
-                    margin: 1.25rem 0;
-                    text-align: center;
-                    a {
-                        color: var(--text);
-                    }
+            li {
+                padding: 10px 0;
+                .header-nav {
+                    font-size: 1.125rem;
+                    padding: 0 10px;
+                }
+                .active {
+                    font-weight: 700;
+                    text-decoration: underline;
+                }
+                text-align: center;
+                a {
+                    color: var(--text);
                 }
             }
         }
