@@ -8,6 +8,9 @@ const form = document.querySelector("form");
 // Selection de liste ul pour afficher les erreurs
 const errorElement = document.querySelector("#errors");
 
+// Selection du bouton annuler
+const btnCancel = document.querySelector(".btn-secondary");
+
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -41,10 +44,22 @@ form.addEventListener("submit", async (event) => {
         try {
             const response = await axios.post("https://restapi.fr/api/ackblog8", formObject);
             console.log("🚀 ~ file: form.js ~ line 43 ~ form.addEventListener ~ response", response);
+
+            // Si le statut de la réponse est inférieur à 300, cela signifie qu'il n'y a pas eu d'erreurs renvoyées par le serveur.
+            if (response.status < 299) {
+                // alors on redirige l’utilisateur vers la page d’accueil
+                location.assign("/index.html");
+            }
         } catch (error) {
             console.error(error);
         }
     }
+});
+
+btnCancel.addEventListener("click", (event) => {
+    event.preventDefault();
+    // redirection sur la page d'accueil quand l'utilisateur clique sur annuler
+    location.assign("./index.html");
 });
 
 const formIsValid = (formObject) => {

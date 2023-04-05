@@ -79,6 +79,7 @@ const createArticles = (articles) => {
     const fragment = new DocumentFragment();
 
     // Crée un élément div pour chaque article et l'ajoute au fragment.
+    // Nous utilisons un new Date() afin de créer un objet Date JavaScript en lui passant en paramètre article.createdAt qui est la date enregistrer sur le serveur par l'API Rest ensuite on appelle la méthode toLocaleDateString() sur celui-ci.
     for (const article of articles) {
         const singleArticleDOM = document.createElement("div");
         singleArticleDOM.classList.add("article");
@@ -86,7 +87,14 @@ const createArticles = (articles) => {
       <img class="article-profile" src="${article.img}" alt="profile" />
       <h2 class="article-title">${article.title}</h2>
       <p class="article-author">${article.author}</p>
-      <p class="article-category">${article.category}</p>
+      <p class="article-category">${new Date(article.createdAt).toLocaleDateString("fr-FR", {
+          weekday: "long",
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+      })}</p>
       <p class="article-content">
       ${article.article}
       </p>
