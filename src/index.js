@@ -71,10 +71,13 @@ console.log("hello from index");
 =============================================*/
 // Les améliorations apportées incluent l'utilisation d'un DocumentFragment pour stocker temporairement les éléments créés avant de les ajouter à la page, ainsi que l'utilisation d'une boucle for...of pour itérer sur le tableau d'articles plutôt que map. La boucle for...of est généralement plus performante pour l'itération sur les tableaux car elle évite de créer un nouveau tableau.
 
-const articlesContainerElement = document.querySelector(".articles-container");
+/*=============================================
+=            Création, suppression et modification des articles            =
+=============================================*/
 
 // Cette fonction prend un tableau d'articles en paramètre et crée un élément HTML pour chaque article.
 const createArticles = (articles) => {
+    const articlesContainerElement = document.querySelector(".articles-container");
     // Crée un fragment de document pour stocker temporairement les éléments créés.
     const fragment = new DocumentFragment();
 
@@ -84,7 +87,7 @@ const createArticles = (articles) => {
         const singleArticleDOM = document.createElement("div");
         singleArticleDOM.classList.add("article");
         singleArticleDOM.innerHTML = `
-      <img class="article-profile" src="${article.img}" alt="profile" />
+        <img class="article-profile" src="${article.img}" alt="profile" />
       <h2 class="article-title">${article.title}</h2>
       <p class="article-author">${article.author}</p>
       <p class="article-category">${new Date(article.createdAt).toLocaleDateString("fr-FR", {
@@ -100,7 +103,7 @@ const createArticles = (articles) => {
       </p>
       <div class="article-actions">
       <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
-      <button class="btn btn-primary">Modifier</button>
+      <button class="btn btn-primary" data-id=${article._id}>Modifier</button>
       </div>
       `;
         fragment.prepend(singleArticleDOM);
@@ -110,6 +113,8 @@ const createArticles = (articles) => {
     // Efface le contenu de l'élément HTML sélectionné et ajoute les éléments créés en une seule opération.
     articlesContainerElement.innerHTML = "";
     articlesContainerElement.append(fragment);
+
+    /*----------  Supprimer un article  ----------*/
 
     // Récupère tous les boutons "Supprimer" créés précédemment et stocke-les dans une variable.
     const deleteButtons = articlesContainerElement.querySelectorAll(".btn-danger");
@@ -136,7 +141,30 @@ const createArticles = (articles) => {
             }
         });
     }
+
+    /*----------  Modifier un article  ----------*/
+
+    // Récupère tous les boutons "Modifier" créés précédemment et stocke-les dans une variable
+    const editButtons = articlesContainerElement.querySelectorAll(".btn-primary");
+
+    // Ajoute un écouteur d'événements à chaque bouton "Modifier"
+    for (const button of editButtons) {
+        button.addEventListener("click", (event) => {
+            // Récupère le bouton cliqué et l'ID de l'article correspondant.
+            // event.target est utilisé pour récupérer l'élément DOM qui a déclenché l'événement et accéder à ses propriétés et attributs associés
+            const target = event.target;
+            // La propriété dataset est utilisée pour accéder aux attributs data-* d'un élément HTML ici pour accéder à la valeur de l'attribut data-id de l'élément HTML qui a déclenché l'événement click.
+            const articleId = target.dataset.id;
+            // Redirection vers le formulaire avec la valeurs `articleId` de l'article a modifier
+            location.assign(`/form.html?id=${articleId}`);
+        });
+    }
 };
+/*=====  End of Création, suppression et modification des articles  ======*/
+
+/*=============================================
+=            Récupération des articles            =
+=============================================*/
 
 // Cette fonction est asynchrone et utilise l'API Fetch pour récupérer des données d'un endpoint de l'API REST.
 const fetchArticles = async () => {
@@ -157,6 +185,8 @@ const fetchArticles = async () => {
         console.error(error);
     }
 };
+
+/*=====  End of Récupération des articles  ======*/
 
 // Appelle la fonction `fetchArticles` pour récupérer et afficher les articles.
 fetchArticles();
