@@ -99,7 +99,7 @@ const createArticles = (articles) => {
           minute: "numeric",
       })}</p>
       <p class="article-content">
-      ${article.article}
+      ${article.content}
       </p>
       <div class="article-actions">
       <button class="btn btn-danger" data-id=${article._id}>Supprimer</button>
