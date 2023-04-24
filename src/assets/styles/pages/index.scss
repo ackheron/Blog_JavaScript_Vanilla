@@ -2,12 +2,35 @@
     background-color: var(--divider);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 1.25rem;
+    padding-top: 4.375rem;
+    .sidebar {
+        flex: 0 0 15.625rem;
+        padding: 0 1.25rem 1.25rem 0;
+        .categories {
+            padding: 1.25rem;
+            background: white;
+            border-radius: 0.1875rem;
+            box-shadow: var(--box-shadow);
+            li {
+                margin: 0.625rem;
+                transition: 200ms;
+                cursor: pointer;
+                &:hover {
+                    color: var(--primary);
+                    strong {
+                        color: var(--primary);
+                    }
+                }
+            }
+        }
+    }
     .articles-container {
         max-width: 50rem;
-        width: 100%;
-        margin: 50px 0 10px 0;
+        // width: 100%;
+        flex: 1;
+        margin: 0 0 10px 0;
         .article {
             background-color: white;
             padding: 0 3.125rem;
