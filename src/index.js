@@ -163,6 +163,59 @@ const createArticles = (articles) => {
 /*=====  End of Création, suppression et modification des articles  ======*/
 
 /*=============================================
+=            Affichage des catégories (Hashtag)            =
+
+La fonction displayMenuCategories prend un tableau categoriesArr en entrée, qui est le tableau renvoyé par la fonction createMenuCategories. Elle affiche ensuite les catégories dans une liste HTML.
+=============================================*/
+
+const displayMenuCategories = (categoriesArr) => {
+    // Récupération de l'élément HTML avec la classe .categories en utilisant la méthode document.querySelector().
+    const categoriesContainerElement = document.querySelector(".categories");
+
+    //la méthode map() pour transformer chaque élément du tableau categoriesArr en un élément de liste HTML (<li>).
+    const liElements = categoriesArr.map((categoryElem) => {
+        const li = document.createElement("li");
+        // la propriété innerHTML de l'élément <li> pour ajouter du texte HTML dans chaque élément de la liste. Le texte affiche le nom de la catégorie et le nombre d'articles correspondant.
+        li.innerHTML = `${categoryElem[0]} ( <strong>${categoryElem[1]}</strong> )`;
+        return li;
+    });
+    console.log("🚀 ~ file: index.js:173 ~ liElements ~ liElements:", liElements);
+
+    categoriesContainerElement.innerHTML = "";
+    // Ajout des éléments HTML `liElements` en utilisant l'opérateur de décomposition, nous pouvons étaler tous les éléments d'un tableau en une liste d'arguments pour la méthode append()
+    categoriesContainerElement.append(...liElements);
+};
+
+/*=====  End of Affichage des catégories (Hashtag)  ======*/
+
+/*=============================================
+=            Récupération et traitement des catégories            =
+=============================================*/
+
+const createMenuCategories = (articles) => {
+    // L'accumulateur est initialisé à un objet vide {}, qui sera utilisé pour compter le nombre d'articles dans chaque catégorie. La valeur courante est un objet représentant un article dans le tableau articles.
+    const categories = articles.reduce((accumulator, article) => {
+        // La fonction de réduction teste si l'objet de l'article courant a une propriété category qui correspond à une catégorie existante dans l'accumulateur. Si c'est le cas, elle incrémente le nombre d'articles dans cette catégorie. Sinon, elle ajoute une nouvelle propriété à l'accumulateur avec le nom de la nouvelle catégorie et une valeur initiale de 1.
+        if (accumulator[article.category]) {
+            accumulator[article.category]++;
+        } else {
+            accumulator[article.category] = 1;
+        }
+        return accumulator;
+        // Une fois que la méthode reduce() a terminé, l'objet categories contient une propriété pour chaque catégorie d'articles trouvée dans le tableau articles, avec une valeur correspondant au nombre d'articles dans cette catégorie.
+    }, {});
+    console.log("🚀 ~ file: index.js:178 ~ categories ~ categories:", categories);
+
+    // la méthode Object.entries() pour transformer l'objet categories en un tableau de tableaux, où chaque sous-tableau contient le nom d'une catégorie et le nombre d'articles correspondant.
+    const categoriesArr = Object.entries(categories);
+    console.log("🚀 ~ file: index.js:188 ~ createMenuCategories ~ categoriesArr:", categoriesArr);
+
+    displayMenuCategories(categoriesArr);
+};
+
+/*=====  End of Récupération et traitement des catégories  ======*/
+
+/*=============================================
 =            Récupération des articles            =
 =============================================*/
 
@@ -178,8 +231,10 @@ const fetchArticles = async () => {
             articles = [articles];
         }
 
-        // Appelle la fonction `createArticles` pour afficher les articles récupérés dans la page HTML.
+        // Appelle la fonction `createArticles` en lui passant le tableau `articles` pour afficher les articles récupérés sur le serveur dans la page HTML.
         createArticles(articles);
+        // Appel de la fonction `createMenuCategories en lui passant le tableau `articles` pour afficher le catégories des articles dans la sidebar de la page HTML.
+        createMenuCategories(articles);
     } catch (error) {
         // Si une erreur se produit, affiche-la dans la console.
         console.error(error);
