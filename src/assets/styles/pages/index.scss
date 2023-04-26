@@ -8,6 +8,16 @@
     .sidebar {
         flex: 0 0 15.625rem;
         padding: 0 1.25rem 1.25rem 0;
+        select {
+            width: 100%;
+            margin-bottom: 1.25rem;
+            border-radius: 0.1875rem;
+            background: white;
+            border: none;
+            outline: 0;
+            padding: 0.625rem;
+            box-shadow: var(--box-shadow);
+        }
         .categories {
             padding: 1.25rem;
             background: white;

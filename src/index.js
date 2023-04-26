@@ -2,8 +2,12 @@ import axios from "axios";
 import "./assets/styles/main.scss";
 
 console.log("hello from index");
+// Variable qui stocke la valeur `article.category` pour permettre le filtrage des articles
 let filter;
+// Variable qui stocke le tableau contenant des articles sous forme d'objets
 let articles;
+// Variable pour le tri par date, par défaut les articles sont triés du plus récent au plus ancient
+let sortBy = "desc";
 /*=============================================
 =            PREMIERE VERSION AVEC MÉTHODE .MAP()          =
 =============================================*/
@@ -169,6 +173,15 @@ const createArticles = () => {
 };
 /*=====  End of Création, suppression et modification des articles  ======*/
 
+const sortByDate = () => {
+    const selectElement = document.querySelector("select");
+    selectElement.addEventListener("change", () => {
+        sortBy = selectElement.value;
+        console.log("🚀 ~ file: index.js:180 ~ selectElement.addEventListener ~ sortBy:", sortBy);
+    });
+};
+sortByDate();
+
 /*=============================================
 =            Affichage des catégories (Hashtag)            =
 
@@ -209,7 +222,6 @@ const displayMenuCategories = (categoriesArr) => {
 };
 
 /*=====  End of Affichage des catégories (Hashtag)  ======*/
-
 /*=============================================
 =            Récupération et traitement des catégories            =
 =============================================*/
