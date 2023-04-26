@@ -117,11 +117,11 @@ const createArticles = () => {
       <button class="btn btn-primary" data-id=${article._id}>Modifier</button>
       </div>
       `;
-        fragment.prepend(singleArticleDOM);
-        // prepend au lieu de append ajoute les éléments dans l'ordre inverse de l'itération de la boucle et donc d'avoir les articles les plus récents en haut de page.
+        // On ajoute les articles itérer dans le fragment
+        fragment.append(singleArticleDOM);
     }
 
-    // Efface le contenu de l'élément HTML sélectionné et ajoute les éléments créés en une seule opération.
+    // Efface le contenu de l'élément HTML sélectionné et ajoute les articles créés dans le fragment en une seule opération.
     articlesContainerElement.innerHTML = "";
     articlesContainerElement.append(fragment);
 
@@ -173,15 +173,6 @@ const createArticles = () => {
 };
 /*=====  End of Création, suppression et modification des articles  ======*/
 
-const sortByDate = () => {
-    const selectElement = document.querySelector("select");
-    selectElement.addEventListener("change", () => {
-        sortBy = selectElement.value;
-        console.log("🚀 ~ file: index.js:180 ~ selectElement.addEventListener ~ sortBy:", sortBy);
-    });
-};
-sortByDate();
-
 /*=============================================
 =            Affichage des catégories (Hashtag)            =
 
@@ -197,6 +188,10 @@ const displayMenuCategories = (categoriesArr) => {
         const li = document.createElement("li");
         // la propriété innerHTML de l'élément <li> pour ajouter du texte HTML dans chaque élément de la liste. Le texte affiche le nom de la catégorie et le nombre d'articles correspondant.
         li.innerHTML = `${categoryElem[0]} ( <strong>${categoryElem[1]}</strong> )`;
+        // Si il existe un filtre, lors de la création et de l'affichage du menu des catégories on lui ajoute alors la classe active
+        if (categoryElem[0] === filter) {
+            li.classList.add("active");
+        }
 
         li.addEventListener("click", () => {
             if (filter === categoryElem[0]) {
@@ -222,6 +217,7 @@ const displayMenuCategories = (categoriesArr) => {
 };
 
 /*=====  End of Affichage des catégories (Hashtag)  ======*/
+
 /*=============================================
 =            Récupération et traitement des catégories            =
 =============================================*/
@@ -241,9 +237,18 @@ const createMenuCategories = () => {
     console.log("🚀 ~ file: index.js:178 ~ categories ~ categories:", categories);
 
     // la méthode Object.entries() pour transformer l'objet categories en un tableau de tableaux, où chaque sous-tableau contient le nom d'une catégorie et le nombre d'articles correspondant.
-    const categoriesArr = Object.entries(categories);
-    console.log("🚀 ~ file: index.js:188 ~ createMenuCategories ~ categoriesArr:", categoriesArr);
+    //La fonction de rappel de la méthode map() prend chaque sous-tableau de categoriesArr comme argument, et utilise la méthode replace() pour supprimer les symboles dièse du premier élément de chaque sous-tableau
+    // La fonction de rappel de la méthode sort() tri par ordre alphabétique sur la première valeur de chaque sous-tableau
+    const categoriesArr = Object.entries(categories)
+        .map((category) => {
+            const categoryName = category[0];
+            const articleCount = category[1];
+            return [categoryName, articleCount];
+        })
+        .sort((a, b) => a[0].localeCompare(b[0]));
+    //localeCompare() est une méthode de l'objet String qui permet de trier des chaînes de caractères selon l'ordre alphabétique
 
+    console.log("🚀 ~ file: index.js:241 ~ createMenuCategories ~ categoriesArr:", categoriesArr);
     displayMenuCategories(categoriesArr);
 };
 
@@ -257,7 +262,7 @@ const createMenuCategories = () => {
 const fetchArticles = async () => {
     try {
         // Récupère les données à partir de l'API REST en utilisant l'API Fetch.
-        const response = await axios.get("https://restapi.fr/api/ackblog8");
+        const response = await axios.get(`https://restapi.fr/api/ackblog8?sort=createdAt:${sortBy}`);
         articles = response.data;
 
         // Si l'objet retourné n'est pas un tableau, transforme-le en tableau.
@@ -274,8 +279,22 @@ const fetchArticles = async () => {
         console.error(error);
     }
 };
+// Appelle la fonction `fetchArticles` pour récupérer et afficher les articles.
+fetchArticles();
 
 /*=====  End of Récupération des articles  ======*/
 
-// Appelle la fonction `fetchArticles` pour récupérer et afficher les articles.
-fetchArticles();
+/*=============================================
+=            Tri par date            =
+=============================================*/
+
+const sortByDate = () => {
+    const selectElement = document.querySelector("select");
+    selectElement.addEventListener("change", () => {
+        sortBy = selectElement.value;
+        fetchArticles();
+    });
+};
+sortByDate();
+
+/*=====  End of Tri par date  ======*/
