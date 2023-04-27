@@ -1,6 +1,6 @@
 import axios from "axios";
+import { openModal } from "./assets/javascripts/modal.js";
 import "./assets/styles/main.scss";
-
 console.log("hello from index");
 // Variable qui stocke la valeur `article.category` pour permettre le filtrage des articles
 let filter;
@@ -133,6 +133,7 @@ const createArticles = () => {
     // Ajoute un écouteur d'événements à chaque bouton "Supprimer".
     for (const button of deleteButtons) {
         button.addEventListener("click", async (event) => {
+            openModal("Êtes vous sur de vouloir supprimer votre article ?");
             // Récupère le bouton cliqué et l'ID de l'article correspondant.
             // event.target est utilisé pour récupérer l'élément DOM qui a déclenché l'événement et accéder à ses propriétés et attributs associés
             const target = event.target;
@@ -140,16 +141,16 @@ const createArticles = () => {
             const articleID = target.dataset.id;
 
             // Envoie une requête DELETE à l'API REST pour supprimer l'article correspondant.
-            try {
-                const response = await axios.delete(`https://restapi.fr/api/ackblog8/${articleID}`);
-                const body = response.data;
-                console.log("🚀 ~ file: index.js ~ line 115 ~ button.addEventListener ~ body", body);
+            // try {
+            //     const response = await axios.delete(`https://restapi.fr/api/ackblog8/${articleID}`);
+            //     const body = response.data;
+            //     console.log("🚀 ~ file: index.js ~ line 115 ~ button.addEventListener ~ body", body);
 
-                // Actualise la liste des articles après la suppression.
-                fetchArticles();
-            } catch (error) {
-                console.error(error);
-            }
+            //     // Actualise la liste des articles après la suppression.
+            //     fetchArticles();
+            // } catch (error) {
+            //     console.error(error);
+            // }
         });
     }
 
@@ -258,10 +259,10 @@ const createMenuCategories = () => {
 =            Récupération des articles            =
 =============================================*/
 
-// Cette fonction est asynchrone et utilise l'API Fetch pour récupérer des données d'un endpoint de l'API REST.
+// Cette fonction est asynchrone et utilise l'API Axios pour récupérer des données d'un endpoint de l'API REST.
 const fetchArticles = async () => {
     try {
-        // Récupère les données à partir de l'API REST en utilisant l'API Fetch.
+        // Récupère les données à partir de l'API REST en utilisant l'API Axios.
         const response = await axios.get(`https://restapi.fr/api/ackblog8?sort=createdAt:${sortBy}`);
         articles = response.data;
 

@@ -4,7 +4,6 @@ console.log("Hello from form");
 
 // Selection du formulaire
 const form = document.querySelector("form");
-
 // Selection de liste ul pour afficher les erreurs
 const errorElement = document.querySelector("#errors");
 
