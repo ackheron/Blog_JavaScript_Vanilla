@@ -133,24 +133,26 @@ const createArticles = () => {
     // Ajoute un écouteur d'événements à chaque bouton "Supprimer".
     for (const button of deleteButtons) {
         button.addEventListener("click", async (event) => {
-            openModal("Êtes vous sur de vouloir supprimer votre article ?");
-            // Récupère le bouton cliqué et l'ID de l'article correspondant.
-            // event.target est utilisé pour récupérer l'élément DOM qui a déclenché l'événement et accéder à ses propriétés et attributs associés
-            const target = event.target;
-            // La propriété dataset est utilisée pour accéder aux attributs data-* d'un élément HTML ici pour accéder à la valeur de l'attribut data-id de l'élément HTML qui a déclenché l'événement click.
-            const articleID = target.dataset.id;
+            const result = await openModal("Êtes vous sur de vouloir supprimer votre article ?");
 
-            // Envoie une requête DELETE à l'API REST pour supprimer l'article correspondant.
-            // try {
-            //     const response = await axios.delete(`https://restapi.fr/api/ackblog8/${articleID}`);
-            //     const body = response.data;
-            //     console.log("🚀 ~ file: index.js ~ line 115 ~ button.addEventListener ~ body", body);
+            if (result === true) {
+                // Envoie une requête DELETE à l'API REST pour supprimer l'article correspondant.
+                try {
+                    // Récupère le bouton cliqué et l'ID de l'article correspondant.
+                    // event.target est utilisé pour récupérer l'élément DOM qui a déclenché l'événement et accéder à ses propriétés et attributs associés
+                    const target = event.target;
+                    // La propriété dataset est utilisée pour accéder aux attributs data-* d'un élément HTML ici pour accéder à la valeur de l'attribut data-id de l'élément HTML qui a déclenché l'événement click.
+                    const articleID = target.dataset.id;
+                    const response = await axios.delete(`https://restapi.fr/api/ackblog8/${articleID}`);
+                    const body = response.data;
+                    console.log("🚀 ~ file: index.js ~ line 115 ~ button.addEventListener ~ body", body);
 
-            //     // Actualise la liste des articles après la suppression.
-            //     fetchArticles();
-            // } catch (error) {
-            //     console.error(error);
-            // }
+                    // Actualise la liste des articles après la suppression.
+                    fetchArticles();
+                } catch (error) {
+                    console.error(error);
+                }
+            }
         });
     }
 

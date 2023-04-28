@@ -3,6 +3,7 @@ console.log("hello from topbar");
 /* Nous créons les références pour l'icône de menu et le menu */
 const iconMobile = document.querySelector(".header-menu-icon");
 const headerMenu = document.querySelector("header");
+const mainSideBard = document.querySelector(".sidebar");
 
 // Variable pour déterminer si le menu est ouvert ou fermé, initialement le menu est fermé
 let isOpenMenu = false;

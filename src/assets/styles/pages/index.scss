@@ -1,14 +1,25 @@
 .index-content {
     background-color: var(--divider);
     display: flex;
+    @include terre {
+        flex-direction: column;
+    }
     justify-content: center;
     align-items: flex-start;
     padding: 1.25rem;
     padding-top: 4.375rem;
     .sidebar {
+        @include terre {
+            // display: none;
+            width: 100%;
+            padding: 0;
+        }
         flex: 0 0 15.625rem;
         padding: 0 1.25rem 1.25rem 0;
         select {
+            @include terre {
+                display: none;
+            }
             width: 100%;
             margin-bottom: 1.25rem;
             border-radius: 0.1875rem;
@@ -19,6 +30,13 @@
             box-shadow: var(--box-shadow);
         }
         .categories {
+            @include terre {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
             padding: 1.25rem;
             background: white;
             border-radius: 0.1875rem;

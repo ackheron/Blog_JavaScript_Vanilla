@@ -1,4 +1,5 @@
 import axios from "axios";
+import { openModal } from "../assets/javascripts/modal.js";
 import "../assets/styles/main.scss";
 console.log("Hello from form");
 
@@ -116,10 +117,12 @@ form.addEventListener("submit", async (event) => {
     }
 });
 
-btnCancel.addEventListener("click", (event) => {
-    event.preventDefault();
+btnCancel.addEventListener("click", async () => {
+    const result = await openModal("Si vous quittez la page, vous allez perdre votre article");
     // redirection sur la page d'accueil quand l'utilisateur clique sur annuler
-    location.assign("./index.html");
+    if (result === true) {
+        location.assign("./index.html");
+    }
 });
 
 /*=============================================
