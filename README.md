@@ -19,7 +19,7 @@
       <img alt="sass" src="https://img.shields.io/badge/SASS-hotpink.svg?flat-badge&logo=SASS&logoColor=white)" />
 
 </p>
-<img src="./screen/montageMARDOWN.png">
+<img src="./src/assets/images/montageMARDOWN.png">
 
 ### Description
 
